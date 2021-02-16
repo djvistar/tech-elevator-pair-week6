@@ -90,3 +90,5 @@ INSERT INTO project_employee (project_id, employee_id) VALUES (6, 11);
 ALTER TABLE employee ADD FOREIGN KEY (department_id) REFERENCES department(department_id);
 ALTER TABLE project_employee ADD FOREIGN KEY (project_id) REFERENCES project(project_id);
 ALTER TABLE project_employee ADD FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
+
+COMMIT;
