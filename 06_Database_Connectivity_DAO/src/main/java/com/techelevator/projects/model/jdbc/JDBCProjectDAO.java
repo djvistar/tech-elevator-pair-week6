@@ -24,7 +24,7 @@ public class JDBCProjectDAO implements ProjectDAO {
 	public List<Project> getAllActiveProjects() {
 
 		ArrayList<Project> projects = new ArrayList<>();
-		String sqlgetAllActiveProjects = "SELECT project_id name, from_date, to_date"+
+		String sqlgetAllActiveProjects = "SELECT project_id, name, from_date, to_date"+
 										   "FROM project ";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sqlgetAllActiveProjects);
 		while(results.next()) {
