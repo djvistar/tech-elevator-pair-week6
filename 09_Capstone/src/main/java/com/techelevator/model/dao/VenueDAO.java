@@ -12,9 +12,10 @@ public interface VenueDAO {
 
 	  List<Venue> getListOfAllVenues();
 	  List<Category>getCategoryListOfVenues();
-	  List<Venue> getAvailability();
+	  List<Space> getAvailability();
 	  List<Space> getListOfSpacesInVenue();
-	Venue getVenueById(String venueId);
+	  Venue getVenueById(String venueId);
+	  
 	  
 	
 	

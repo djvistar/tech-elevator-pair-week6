@@ -334,3 +334,9 @@ ALTER SEQUENCE city_id_seq RESTART 1000;
 ALTER SEQUENCE venue_id_seq RESTART 1000;
 
 COMMIT;
+
+--select venue.id,venue.name, space.id, space.name, reservation.start_date, reservation.end_date, space.open_from, space.open_to
+--From space
+--Join reservation ON space.id = reservation.space_id
+--Join venue ON venue.id = space.venue_id
+--Where reservation.start_date is not null --AND space.open_from is not null and space.open_to is not null
