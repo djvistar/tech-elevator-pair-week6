@@ -24,10 +24,11 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Venue> getListOfAllVenues() {
 		List<Venue> allVenues = new ArrayList<Venue>();
-		String sql = "SELECT * FROM venue";
-		//String sql = "SELECT venue.name, city.name, state.name, venue.description " + " FROM venue "
-		//	+ " JOIN city ON venue.city_id = city.id " + " JOIN state ON city.state_abbreviation = state.abbreviation "
-		//		+ " ORDER BY venue.name ASC ";
+
+		String sql = "SELECT venue.*, city.*, state.* " + " FROM venue "
+			+ " JOIN city ON venue.city_id = city.id " + " JOIN state ON city.state_abbreviation = state.abbreviation "
+				+ " ORDER BY venue.name ASC ";
+
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
