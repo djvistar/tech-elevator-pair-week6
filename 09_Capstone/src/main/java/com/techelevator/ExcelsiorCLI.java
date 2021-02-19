@@ -4,6 +4,10 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import com.techelevator.view.Menu;
+
+import java.util.List;
+
 public class ExcelsiorCLI {
 
 	public static void main(String[] args) {
@@ -15,15 +19,38 @@ public class ExcelsiorCLI {
 		ExcelsiorCLI application = new ExcelsiorCLI(dataSource);
 		application.run();
 	}
-
+private Menu menu;
 	public ExcelsiorCLI(DataSource datasource) {
-
+			
+		
 	}
-
+	
+	
+	//MENU TITLE METHODS
+	//String makeReservationMenu() 
+	//String venueSpacesMenu() 
+	//String spaceDetailsMenu()
+	//String venueDetailsMenu()
+	
+	
+	// Reminder: No System.out.printlns in this class
 	public void run() {
 
-		// Reminder: No System.out.printlns in this class
+		boolean running = true;
+		
+			while (running) {
+				
+				String choice = menu.printMainMenu();
+				
+				
+				
+			}
 
+		
+		
+		
+		
+		
 		// Availability check
 //		 if userinput start date > reservation startdate && userinput start date <reservation end date
 //		then not available

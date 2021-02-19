@@ -46,7 +46,8 @@ public class VenueSqlDAO implements VenueDAO {
 		List<Category> allCategoriesFromVenue = new ArrayList<Category>();
 		String sql = "SELECT category.name, venue.name " + "FROM category "
 				+ "JOIN category_venue ON category_venue.category_id = category.id"
-				+ "JOIN category_venue ON category_venue.venue_id = venue.id";
+				+ "JOIN venue ON category_venue.venue_id = venue.id"+
+				"WHERE venue.id = ?";
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -63,7 +64,10 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getListOfSpacesInVenue() {
 		List<Space> allSpacesFromVenue = new ArrayList<Space>();
-		String sql = "SELECT space.*, venue.name" + "FROM space" + "JOIN venue ON space.venue_id = venue_id";
+		String sql = "venue.name, space.name, space.is_accessible, space.daily_rate" +
+					"FROM space" + 
+					"JOIN venue ON space.venue_id = venue_id"+
+					"WHERE venue.id = ?";
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -103,7 +107,7 @@ public class VenueSqlDAO implements VenueDAO {
 		String sql = "select venue.id, venue.name, space.id, space.name, space.max_occupancy, reservation.start_date, reservation.end_date, space.open_from, space.open_to"
 				+ "FROM space" + "Left Outer Join reservation ON space.id = reservation.space_id"
 				+ "Join venue ON venue.id = space.venue_id"
-				+ "where venue.id is not null";  //MAY WANT TO UPDATE WHERE STATEMENT to target specific space/venue as opposed to just venue not null.
+				+ "where venue.id = ?";  //MAY WANT TO UPDATE WHERE STATEMENT to target specific space/venue as opposed to just venue not null.
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -111,6 +115,9 @@ public class VenueSqlDAO implements VenueDAO {
 
 			Space space = mapRowToSpace(results);
 			reservedDatesInSpaces.add(space);
+
+		}
+		return reservedDatesInSpaces;
 
 		}
 		/// if userinput start date > reservation startdate && userinput start date
@@ -128,9 +135,7 @@ public class VenueSqlDAO implements VenueDAO {
 		// else
 		// input into list as Available
 
-		return reservedDatesInSpaces;
-
-	}
+	
 
 	
 	
@@ -176,7 +181,7 @@ public class VenueSqlDAO implements VenueDAO {
 	public void createReservation(Reservation reservation) {
 		
      int nextReservationId = getNextReservationId();
-		
+			//is reservation_id sequential since it is serial?
 		String reservationSQL = "INSERT INTO reservation(reservation_id, space_id, number_of_attendees, start_date, end_date, reserved_for) " +
                 "VALUES(?, ?, ?, ?, ?)";
 		
