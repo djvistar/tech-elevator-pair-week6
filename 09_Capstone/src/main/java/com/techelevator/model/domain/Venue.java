@@ -9,9 +9,11 @@ public class Venue {
 	private String city;
 	private String state;
 	private Space space;
+	private Reservation reservation;
 	
 	
 	
+
 	//getters and setters
 	public int getVenuId() {
 		return venuId;
@@ -54,6 +56,12 @@ public class Venue {
 	}
 	public void setSpace(Space space) {
 		this.space = space;
+	}
+	public Reservation getReservation() {
+		return reservation;
+	}
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
 	}
 
 	

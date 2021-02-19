@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import com.techelevator.model.domain.Category;
+import com.techelevator.model.domain.Reservation;
 import com.techelevator.model.domain.Space;
 import com.techelevator.model.domain.Venue;
 
@@ -131,6 +132,71 @@ public class VenueSqlDAO implements VenueDAO {
 
 	}
 
+	
+	
+	@Override
+	public List<Reservation> getAllReservations() {
+		List<Reservation> allReservations = new ArrayList<Reservation>();
+
+		String sql = "SELECT * "
+				+ "FROM Reservation";
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+		while (results.next()) {
+
+			Reservation reservation = mapRowToReservation(results);
+			allReservations.add(reservation);
+
+		}
+
+		return allReservations;
+	}
+	
+	
+	@Override
+	public Reservation getReservationById(int reservationId) {
+		Reservation  reservation  = null;
+
+		String sql = "SELECT reservation.* " + "FROM reservation" + "WHERE reservation_id = ?";
+
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, reservationId);
+
+		if (result.next()) {
+			reservation= mapRowToReservation(result);
+		}
+
+		return reservation;
+	
+	}
+
+
+	
+	@Override
+	public void createReservation(Reservation reservation) {
+		
+     int nextReservationId = getNextReservationId();
+		
+		String reservationSQL = "INSERT INTO reservation(reservation_id, space_id, number_of_attendees, start_date, end_date, reserved_for) " +
+                "VALUES(?, ?, ?, ?, ?)";
+		
+		
+		jdbcTemplate.update(reservationSQL, 
+				nextReservationId,
+                reservation.getReservationId(),
+                reservation.getNumberOfAttendees(),
+                reservation.getStartDate(),
+                reservation.getEndDate(),
+                reservation.getReservedFor()
+                );
+
+		
+	}
+	
+	
+	
+	
+
 	private Venue mapRowToVenue(SqlRowSet results) {
 		Venue venue = new Venue();
 
@@ -170,5 +236,33 @@ public class VenueSqlDAO implements VenueDAO {
 
 		return space;
 	}
+
+	
+
+	private Reservation mapRowToReservation(SqlRowSet results) {
+		Reservation reservation = new Reservation();
+		
+		reservation.setReservationId(results.getInt("reservationId"));
+		reservation.setNumberOfAttendees(results.getInt("numberOfAttendees"));
+		reservation.setStartDate(results.getString("startDate"));
+		reservation.setEndDate(results.getString("endDate"));
+		reservation.setReservedFor(results.getString("reservedFor"));
+	
+		return reservation;
+	}
+
+	
+
+	private int getNextReservationId() {
+		SqlRowSet nextIdResult = jdbcTemplate.queryForRowSet("SELECT nextval('reservation_reservation_id_seq')");
+		if(nextIdResult.next()) {
+			return nextIdResult.getInt(1);
+		} else {
+			throw new RuntimeException("Something went wrong while getting an id for the new reservation");
+		}
+	}
+
+	
+
 
 }
