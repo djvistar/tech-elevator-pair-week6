@@ -50,7 +50,10 @@ public class ExcelsiorCLI {
 			while (running) {
 				
 				String choice = menu.printMainMenu();
+			
 				if (choice.equals("1")) {
+					
+					
 					List<Venue>listAllVenues = venueDAO.getListOfAllVenues();
 					menu.printListOfVenues(listAllVenues);
 	

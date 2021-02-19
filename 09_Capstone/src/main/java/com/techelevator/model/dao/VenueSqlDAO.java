@@ -25,30 +25,32 @@ public class VenueSqlDAO implements VenueDAO {
 	public List<Venue> getListOfAllVenues() {
 		List<Venue> allVenues = new ArrayList<Venue>();
 
-		String sql = "SELECT venue.*, city.*, state.* " + " FROM venue "
+		String sql = "SELECT venue.*, city.name AS city_name, state.name AS state_name" +
+		" FROM venue"
 			+ " JOIN city ON venue.city_id = city.id " + " JOIN state ON city.state_abbreviation = state.abbreviation "
-				+ " ORDER BY venue.name ASC ";
+			+ " ORDER BY venue.name ASC ";
 
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
 		while (results.next()) {
-
+			
+			
 			Venue venue = mapRowToVenue(results);
 			allVenues.add(venue);
 
 		}
-
+		
 		return allVenues;
+	
 	}
-
 	@Override
 	public List<Category> getCategoryListOfVenues() {
 		List<Category> allCategoriesFromVenue = new ArrayList<Category>();
-		String sql = "SELECT category.name, venue.name " + "FROM category "
-				+ "JOIN category_venue ON category_venue.category_id = category.id"
-				+ "JOIN venue ON category_venue.venue_id = venue.id"+
-				"WHERE venue.id = ?";
+		String sql = "SELECT category.name AS category_name, venue.name AS venue_name" + "FROM category "
+				+ "JOIN category_venue ON category_venue.category_id = category.id "
+				+ "JOIN venue ON category_venue.venue_id = venue.id "+
+				"WHERE venue.id = ? ";
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -65,10 +67,10 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getListOfSpacesInVenue() {
 		List<Space> allSpacesFromVenue = new ArrayList<Space>();
-		String sql = "venue.name, space.name, space.is_accessible, space.daily_rate" +
-					"FROM space" + 
-					"JOIN venue ON space.venue_id = venue_id"+
-					"WHERE venue.id = ?";
+		String sql = "venue.name AS venue_name, space.name AS space_name, space.is_accessible, space.daily_rate AS daily_rate " +
+					"FROM space " + 
+					"JOIN venue ON space.venue_id = venue_id "+
+					"WHERE venue.id = ? ";
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -209,22 +211,22 @@ public class VenueSqlDAO implements VenueDAO {
 		venue.setVenueId(results.getInt("id"));    
 		venue.setVenueName(results.getString("name"));
 		venue.setDescription(results.getString("description"));
-		//venue.setCity(results.getString("state.name"));
-		//1venue.setState(results.getString("state_abbreviation"));
-//
+		venue.setCity(results.getString("city_name"));
+		venue.setState(results.getString("state_name"));
+
 //		Category category = new Category();
-//		category.setCategoryId(results.getInt("categoryId"));
-//		category.setCategoryName(results.getString("categoryName"));
+//	category.setCategoryId(results.getInt("category_name"));
+//	category.setCategoryName(results.getString("venu_name"));
 //
-//		venue.setCategory(category);
+//	venue.setCategory(category);
 
 		return venue;
 	}
 
 	private Category mapRowToCategory(SqlRowSet results) {
 		Category category = new Category();
-		category.setCategoryId(results.getInt("id"));
-		category.setCategoryName(results.getString("name"));
+		category.setCategoryName(results.getString("category_name"));
+		
 
 		return category;
 	}
@@ -232,13 +234,13 @@ public class VenueSqlDAO implements VenueDAO {
 	private Space mapRowToSpace(SqlRowSet results) {
 		Space space = new Space();
 
-		space.setSpaceId(results.getInt("spaceId"));
-		space.setSpaceName(results.getString("sapceName"));
-		space.setOpenFrom(results.getInt("openFrom"));
-		space.setOpenTo(results.getInt("openTo"));
-		space.setAccessible(results.getBoolean("isAccessible"));
-		space.setMaxOccupancy(results.getString("maxOccupancy"));
-		space.setDailyRate(results.getDouble("dailyRate"));
+		//space.setSpaceId(results.getInt("spaceId"));
+		space.setSpaceName(results.getString("space_name"));
+		//space.setOpenFrom(results.getInt("openFrom"));
+		//space.setOpenTo(results.getInt("openTo"));
+		//space.setAccessible(results.getBoolean("isAccessible"));
+		//space.setMaxOccupancy(results.getString("maxOccupancy"));
+		space.setDailyRate(results.getDouble("daily_rate"));
 
 		return space;
 	}
@@ -248,11 +250,11 @@ public class VenueSqlDAO implements VenueDAO {
 	private Reservation mapRowToReservation(SqlRowSet results) {
 		Reservation reservation = new Reservation();
 		
-		reservation.setReservationId(results.getInt("reservationId"));
-		reservation.setNumberOfAttendees(results.getInt("numberOfAttendees"));
-		reservation.setStartDate(results.getString("startDate"));
-		reservation.setEndDate(results.getString("endDate"));
-		reservation.setReservedFor(results.getString("reservedFor"));
+		reservation.setReservationId(results.getInt("reservation_id"));
+		reservation.setNumberOfAttendees(results.getInt("number_of_attendees"));
+		reservation.setStartDate(results.getString("start_date"));
+		reservation.setEndDate(results.getString("end_date"));
+		reservation.setReservedFor(results.getString("reserved_for"));
 	
 		return reservation;
 	}
@@ -267,6 +269,8 @@ public class VenueSqlDAO implements VenueDAO {
 			throw new RuntimeException("Something went wrong while getting an id for the new reservation");
 		}
 	}
+
+
 
 	
 

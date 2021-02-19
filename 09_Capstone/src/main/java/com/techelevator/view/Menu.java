@@ -18,7 +18,7 @@ public class Menu {
 	public String printMainMenu() {
 
 		System.out.println("Please Make A Selection From Below:");
-		System.out.println(1);
+		System.out.println("1 List of Venues");
 		System.out.println("Q.  Quit");
 
 		return scanner.nextLine();
@@ -85,15 +85,31 @@ public class Menu {
 			System.out.println("No Results Found!");
 			return;
 		}
-
+        
 		for (Venue venue : venuesToPrint) {
-
+      
 			printVenue(venue);
 		}
 
 	}
-
-	public void printVenue(Venue venue) {
+ public void printVenue(Venue venue) {
+	 
+	 int i =1;
+	
+	 if (venue == null) {
+			System.out.println("No results found... Pleast try again.");
+			return;
+		} else {
+			 
+			System.out.println( i +" " + venue.getVenueName());
+			 i++;
+		}
+	 
+ }
+ 
+ 
+ 
+	public void printVenueDetails(Venue venue) {
 
 		if (venue == null) {
 			System.out.println("No results found... Pleast try again.");
