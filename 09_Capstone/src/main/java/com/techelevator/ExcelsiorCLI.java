@@ -4,11 +4,23 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+import com.techelevator.model.dao.VenueDAO;
+import com.techelevator.model.dao.VenueSqlDAO;
+import com.techelevator.model.domain.Venue;
 import com.techelevator.view.Menu;
 
 import java.util.List;
 
 public class ExcelsiorCLI {
+	
+	private Menu menu;
+	private VenueDAO venueDAO;
+	
+		public ExcelsiorCLI(DataSource datasource) {
+			this.menu = new Menu();
+			venueDAO = new VenueSqlDAO(datasource);
+			
+		}
 
 	public static void main(String[] args) {
 		BasicDataSource dataSource = new BasicDataSource();
@@ -19,11 +31,8 @@ public class ExcelsiorCLI {
 		ExcelsiorCLI application = new ExcelsiorCLI(dataSource);
 		application.run();
 	}
-private Menu menu;
-	public ExcelsiorCLI(DataSource datasource) {
-			
-		
-	}
+	
+
 	
 	
 	//MENU TITLE METHODS
@@ -41,9 +50,13 @@ private Menu menu;
 			while (running) {
 				
 				String choice = menu.printMainMenu();
-				
-				
-				
+				if (choice.equals("1")) {
+					List<Venue>listAllVenues = venueDAO.getListOfAllVenues();
+					menu.printListOfVenues(listAllVenues);
+	
+			
+				}
+						
 			}
 
 		

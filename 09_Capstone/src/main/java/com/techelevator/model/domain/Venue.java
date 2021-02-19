@@ -2,8 +2,8 @@ package com.techelevator.model.domain;
 
 public class Venue {
 	
-	private int venuId;
-	private String venuName;
+	private int venueId;
+	private String venueName;
 	private String description;
 	private Category category; // UPDATE LATER
 	private String city;
@@ -15,17 +15,17 @@ public class Venue {
 	
 
 	//getters and setters
-	public int getVenuId() {
-		return venuId;
+	public int getVenueId() {
+		return venueId;
 	}
-	public void setVenuId(int venuId) {
-		this.venuId = venuId;
+	public void setVenueId(int venueId) {
+		this.venueId = venueId;
 	}
-	public String getVenuName() {
-		return venuName;
+	public String getVenueName() {
+		return venueName;
 	}
-	public void setVenuName(String venuName) {
-		this.venuName = venuName;
+	public void setVenueName(String venueName) {
+		this.venueName = venueName;
 	}
 	public String getDescription() {
 		return description;
