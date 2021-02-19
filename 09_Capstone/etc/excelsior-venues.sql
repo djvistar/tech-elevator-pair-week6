@@ -340,3 +340,20 @@ COMMIT;
 --Left Outer Join reservation ON space.id = reservation.space_id
 --Join venue ON venue.id = space.venue_id
 --Where venue.id is not null --AND space.open_from is not null and space.open_to is not null
+
+--gets category list by venue ID, DAO needs query tweaked for input of 
+--SELECT category.name, venue.name  FROM category 
+--JOIN category_venue ON category_venue.category_id = category.id
+--JOIN venue ON category_venue.venue_id = venue.id
+--Where venue.id = 13
+
+--getListOfSpacesInVenue()    needed tweaked, was getting thousands of results due to mis worded Join
+--SELECT  venue.name AS Venue_Name, space.name AS Space_Name, space.is_accessible AS Handicap_Accesible, space. daily_rate
+--FROM space
+--JOIN venue ON space.venue_id = venue.id
+--WHERE venue.id = ?
+
+--
+--SELECT venue.*
+--FROM venue
+--WHERE venue_id = ?
