@@ -99,10 +99,10 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getAvailability() {
 		List<Space> reservedDatesInSpaces = new ArrayList<Space>();
-		String sql = "select space.name, reservation.start_date, reservation.end_date, space.open_from, space.open_to "
-				+ "FROM space" + "JOIN reservation ON space.id = reservation.space_id"
+		String sql = "select venue.id, venue.name, space.id, space.name, space.max_occupancy, reservation.start_date, reservation.end_date, space.open_from, space.open_to"
+				+ "FROM space" + "Left Outer Join reservation ON space.id = reservation.space_id"
 				+ "Join venue ON venue.id = space.venue_id"
-				+ "where reservation.start_date is not null AND venue.id = ?";
+				+ "where venue.id is not null";  //MAY WANT TO UPDATE WHERE STATEMENT to target specific space/venue as opposed to just venue not null.
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
