@@ -25,7 +25,9 @@ public class VenueSqlDAO implements VenueDAO {
 	public List<Venue> getListOfAllVenues() {
 		List<Venue> allVenues = new ArrayList<Venue>();
 
-		String sql = "SELECT venue.*, city.name AS city_name, state.name AS state_name" +
+		String sql =
+				"SELECT ROW_NUMBER ()OVER (ORDER BY venue.name ASC) AS row_id, venue.*, city.name AS city_name, state.name AS state_name "+
+				//"SELECT venue.*, city.name AS city_name, state.name AS state_name" +
 		" FROM venue"
 			+ " JOIN city ON venue.city_id = city.id " + " JOIN state ON city.state_abbreviation = state.abbreviation "
 			+ " ORDER BY venue.name ASC ";
@@ -207,7 +209,8 @@ public class VenueSqlDAO implements VenueDAO {
 
 	private Venue mapRowToVenue(SqlRowSet results) {
 		Venue venue = new Venue();
-
+		
+		venue.setRowId(results.getInt("row_id"));
 		venue.setVenueId(results.getInt("id"));    
 		venue.setVenueName(results.getString("name"));
 		venue.setDescription(results.getString("description"));

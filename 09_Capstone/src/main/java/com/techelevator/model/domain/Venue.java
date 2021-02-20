@@ -2,6 +2,8 @@ package com.techelevator.model.domain;
 
 public class Venue {
 	
+	private int rowId;
+	
 	private int venueId;
 	private String venueName;
 	private String description;
@@ -15,6 +17,12 @@ public class Venue {
 	
 
 	//getters and setters
+	public int getRowId() {
+		return rowId;
+	}
+	public void setRowId(int rowId) {
+		this.rowId = rowId;
+	}
 	public int getVenueId() {
 		return venueId;
 	}

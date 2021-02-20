@@ -3,7 +3,7 @@ package com.techelevator.view;
 import java.util.List;
 import java.util.Scanner;
 
-
+import com.techelevator.model.domain.Space;
 import com.techelevator.model.domain.Venue;
 
 public class Menu {
@@ -85,30 +85,28 @@ public class Menu {
 			System.out.println("No Results Found!");
 			return;
 		}
-        
+
 		for (Venue venue : venuesToPrint) {
-      
+
 			printVenue(venue);
 		}
-
+		System.out.println("\n************************************\n");
+		// functionality, print the pick a venue menu here;
 	}
- public void printVenue(Venue venue) {
-	 
-	 int i =1;
-	
-	 if (venue == null) {
+
+	public void printVenue(Venue venue) {
+
+		if (venue == null) {
 			System.out.println("No results found... Pleast try again.");
 			return;
 		} else {
-			 
-			System.out.println( i +" " + venue.getVenueName());
-			 i++;
+
+			System.out.println(venue.getRowId() + " " + venue.getVenueName());
+
 		}
-	 
- }
- 
- 
- 
+
+	}
+
 	public void printVenueDetails(Venue venue) {
 
 		if (venue == null) {
@@ -126,6 +124,39 @@ public class Menu {
 			System.out.println("\n*********** *** *** ***  ************\n");
 
 		}
+	}
+	public void printListOfSpace(List<Space> SpacesToPrint) {
+
+		System.out.println("\n********* Venue Results **********\n");
+
+		if (SpacesToPrint.isEmpty()) {
+			System.out.println("No Results Found!");
+			return;
+		}
+
+		for (Space space : SpacesToPrint) {
+
+			printSpace(space);
+		}
+		System.out.println("\n************************************\n");
+		// functionality, print the pick a venue menu here;
+	}
+	public void printSpace(Space space) {
+		
+		System.out.println(space.getSpaceId()+" "+space.getSpaceName()+" "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+" "+space.getDailyRate()+space.getMaxOccupancy());
+		
+		
+		
+	}
+
+	public void closeProgram() {
+
+		System.out.println("Exiting Program");
+	}
+
+	public void invalidChoice() {
+
+		System.out.println("invalid choice, Try Again.");
 	}
 
 }
