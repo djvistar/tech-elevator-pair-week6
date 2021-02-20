@@ -71,6 +71,7 @@ public class Menu {
 		scanner.nextLine();
 		System.out.println("How many people will be in attendance?");
 		scanner.nextLine();
+		
 		// checks input against our list
 		// prints screen of spaces available based on needs
 

@@ -71,8 +71,8 @@ public class VenueSqlDAO implements VenueDAO {
 		List<Space> allSpacesFromVenue = new ArrayList<Space>();
 		String sql ="SELECT space.daily_rate::money::numeric::float8 AS daily_rate, space.id AS id, space.name AS space_name, space.open_from AS open_from, space.open_to AS open_to, space.max_occupancy AS max_occupancy " +
 					"FROM space " + 
-					"JOIN venue ON space.venue_id = venue.id ";
-					//"WHERE venue.id = ? ";
+					"JOIN venue ON space.venue_id = venue.id " ;
+		//			"WHERE venue_id = ? ";
 		//String sql = "SELECT * " + "FROM space ";
 //                                                               space.daily_rate::money::numeric::float8
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
@@ -115,7 +115,7 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getAvailability() {
 		List<Space> reservedDatesInSpaces = new ArrayList<Space>();
-		String sql = "select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, space.daily_rate::money::numeric::float8 AS daily_rate, reservation.start_date AS start_date, reservation.end_date AS end_date, space.open_from AS open_from, space.open_to AS open_to "
+		String sql = "select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, space.daily_rate::money::numeric::float8 AS daily_rate, space.open_from AS open_from, space.open_to AS open_to "
 				+ "FROM space " +
 				"Left outer Join reservation ON space.id = reservation.space_id "
 				+ "Join venue ON venue.id = space.venue_id " + "order by space_id ";
@@ -132,6 +132,14 @@ public class VenueSqlDAO implements VenueDAO {
 		return reservedDatesInSpaces;
 
 		}
+	
+//   FOR RESERVATION CHECK	
+//	"select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, space.daily_rate::money::numeric::float8 AS daily_rate, reservation.start_date AS start_date, reservation.end_date AS end_date, space.open_from AS open_from, space.open_to AS open_to "
+//	+ "FROM space " +
+//	"Left outer Join reservation ON space.id = reservation.space_id "
+//	+ "Join venue ON venue.id = space.venue_id " + "order by space_id ";
+	
+	
 		/// if userinput start date > reservation startdate && userinput start date
 		/// <reservation end date
 		// then not available

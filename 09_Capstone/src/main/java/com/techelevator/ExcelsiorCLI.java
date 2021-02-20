@@ -101,8 +101,8 @@ public class ExcelsiorCLI {
 			else if(submenuChoice.equalsIgnoreCase("2")) {
 				List<Space> availableSpaces = venueDAO.getAvailability();
 				
-				menu.printAvailableSpaces(availableSpaces);
-				//handleReservationSubMenu();
+				//menu.printAvailableSpaces(availableSpaces); hold for later
+				handleReservationSubMenu();
 				//create submenumethod for here
 				//menu.makeReservationMenu();
 				
@@ -113,35 +113,39 @@ public class ExcelsiorCLI {
 			}
 		}
 		}
-//		public void handleReservationSubMenu() {
-//			boolean reservationRunning = true;
-//			while(reservationRunning) {
-//				Date startDate = null;
-//				SimpleDateFormat dateFormat;
-//				String userReservationInput = menu.makeReservationMenu();
-//				
-//				String startDateinput = userReservationInput;
-////				Prompted			System.out.println("When do you need the space?");	
-//				
-//				try {
-//					startDate = new SimpleDateFormat("MM-dd-yyyy").parse(startDateinput);
-//					
-//				
-//				} catch (ParseException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} 
-//				Calendar cal =Calendar.getInstance();
-//				cal.setTime(startDate);
-//				
-//				String userNumberOfDays = menu.makeReservationMenu(); 
-//				int daysForReservation = Integer.parseInt(userNumberOfDays);
-//				
-//				cal.add(Calendar.DAY_OF_MONTH, daysForReservation);
-				//SimpleDateFormat endDate = startDate(cal.getTime());
-						//
-				//c.add(Calendar.DAY_OF_MONTH, 7); 
+		public void handleReservationSubMenu() {
+			boolean reservationRunning = true;
+			while(reservationRunning) {
+				Date startDate = null;
+				SimpleDateFormat dateFormat;
+				String userReservationInput = menu.makeReservationMenu();
 				
+				String startDateinput = userReservationInput;
+//				Prompted			System.out.println("When do you need the space?");	
+				
+				try {
+					startDate = new SimpleDateFormat("MM-dd-yyyy").parse(startDateinput);
+					
+				
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				Calendar cal =Calendar.getInstance();
+				cal.setTime(startDate);
+				
+				String userNumberOfDays = menu.makeReservationMenu(); 
+				int daysForReservation = Integer.parseInt(userNumberOfDays);
+				
+				cal.add(Calendar.DAY_OF_MONTH, daysForReservation);
+				Date endDate = cal.getTime();		
+				
+				
+				
+				//variables to be used
+				//start date
+				//endDate
+				//Attendees
 				
 //				Date arrivalDate = null;
 //				System.out.println("What is the arrival date? yyyy-mm-dd");
@@ -191,11 +195,11 @@ public class ExcelsiorCLI {
 				// checks input against our list
 				// prints screen of spaces available based on needs
 	
-//				}
+			}
 			
 			
 		
-	//}
+	}
 
 
 				
