@@ -69,10 +69,11 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getListOfSpacesInVenue() {
 		List<Space> allSpacesFromVenue = new ArrayList<Space>();
-		String sql ="SELECT CAST(space.daily_rate AS decimal),space.*, space.name AS space_name, space.open_from AS open_from, space.open_to AS open_to, space.daily_rate AS daily_rate, space.max_occupancy AS max_occupancy " +
+		String sql ="SELECT CAST (space.daily_rate::money::numeric::float8), space.*, space.name AS space_name, space.open_from AS open_from, space.open_to AS open_to, space.daily_rate AS daily_rate, space.max_occupancy AS max_occupancy " +
 					"FROM space " + 
 					"JOIN venue ON space.venue_id = venue.id ";
 					//"WHERE venue.id = ? ";
+		//String sql = "SELECT * " + "FROM space ";
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -248,7 +249,7 @@ public class VenueSqlDAO implements VenueDAO {
 		space.setOpenFrom(results.getInt("open_from"));
 		space.setOpenTo(results.getInt("open_to"));
 		//space.setAccessible(results.getBoolean("isAccessible"));
-		//space.setDailyRate(results.getDouble("daily_rate"));
+		space.setDailyRate(results.getDouble("daily_rate"));
 		space.setMaxOccupancy(results.getString("max_occupancy"));
 		
 
