@@ -32,7 +32,7 @@ public class Menu {
 //		System.out.println();
 //		System.out.println();
 //		System.out.println();
-
+		
 		return scanner.nextLine();
 	}
 
@@ -101,10 +101,10 @@ public class Menu {
 			return;
 		} else {
 
-			System.out.println(venue.getRowId() + " " + venue.getVenueName());
+			System.out.println(String.format("%-5s %-35s %-5s %s", "Venue Name: ", venue.getVenueName() ," Venue Number: ", venue.getVenueId())); //venue.getRowId() + " " +
 
 		}
-
+		//"-25s, %s"
 	}
 
 	public void printVenueDetails(Venue venue) {
@@ -119,8 +119,8 @@ public class Menu {
 			System.out.println(String.format("%-25s %s", "Venue ID: ", venue.getVenueId()));
 			System.out.println(String.format("%-25s %s", "Venue Name: ", venue.getVenueName()));
 			System.out.println(String.format("%-25s %s", "City: ", venue.getCity()));
-			System.out.println(String.format("%-25s $%s", "State: ", venue.getState()));
-			System.out.println(String.format("%-25s $%s", "Categories: ", venue.getCategory()));
+			System.out.println(String.format("%-25s %s", "State: ", venue.getState()));
+			System.out.println(String.format("%-25s %s", "Categories: ", venue.getCategory()));
 			System.out.println("\n*********** *** *** ***  ************\n");
 
 		}

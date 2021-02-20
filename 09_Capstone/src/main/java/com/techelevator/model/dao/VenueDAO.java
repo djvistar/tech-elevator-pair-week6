@@ -15,7 +15,7 @@ public interface VenueDAO {
 	  List<Category>getCategoryListOfVenues();
 	  List<Space> getAvailability();
 	  List<Space> getListOfSpacesInVenue();
-	  Venue getVenueById(String venueId);
+	  Venue getVenueById(int venueId);
 	  List<Reservation>getAllReservations();
 	  Reservation getReservationById(int reservationId);
 	  void createReservation(Reservation reservation);

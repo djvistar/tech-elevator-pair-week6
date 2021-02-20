@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+
 import com.techelevator.model.dao.VenueDAO;
 import com.techelevator.model.dao.VenueSqlDAO;
 import com.techelevator.model.domain.Space;
@@ -106,10 +107,12 @@ public class ExcelsiorCLI {
 		while(venuemenurunning) {
 		menu.menuOfAllVenues();
 		
-		String venueListChoice = menu.menuOfAllVenues();
-		if (venueListChoice.equalsIgnoreCase("1")) {
-			System.out.println("value carries");
-		}
+		String userInputListChoice = menu.menuOfAllVenues(); //venuelistchoice is our row_id we're searching for
+		int intVenueChoiceForSearch = Integer.parseInt(userInputListChoice);
+		Venue venue = venueDAO.getVenueById(intVenueChoiceForSearch);
+		
+		menu.printVenueDetails(venue);
+		
 		//while(venueListChoice.)
 		//user picks number
 //	while() {

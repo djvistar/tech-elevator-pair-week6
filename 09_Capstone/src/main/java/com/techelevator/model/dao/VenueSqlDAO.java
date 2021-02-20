@@ -88,11 +88,16 @@ public class VenueSqlDAO implements VenueDAO {
 	}
 
 	@Override
-	public Venue getVenueById(String venueId) {
+	public Venue getVenueById(int venueId) { 
 		Venue venue = null;
 
-		String sql = "SELECT venue.* " + "FROM venue " + "WHERE venue_id = ?";
-
+		String sql = "SELECT venue.*, city.name AS city_name, state.name AS state_name "+
+		"FROM venue " +
+		" JOIN city ON venue.city_id = city.id " + 
+		" JOIN state ON city.state_abbreviation = state.abbreviation " +
+		" WHERE venue.id = ?";
+		
+		
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, venueId);
 
 		if (result.next()) {
@@ -210,7 +215,7 @@ public class VenueSqlDAO implements VenueDAO {
 	private Venue mapRowToVenue(SqlRowSet results) {
 		Venue venue = new Venue();
 		
-		venue.setRowId(results.getInt("row_id"));
+		//venue.setRowId(results.getInt("row_id"));
 		venue.setVenueId(results.getInt("id"));    
 		venue.setVenueName(results.getString("name"));
 		venue.setDescription(results.getString("description"));
