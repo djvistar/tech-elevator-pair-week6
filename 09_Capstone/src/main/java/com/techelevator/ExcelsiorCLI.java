@@ -64,6 +64,23 @@ public class ExcelsiorCLI {
 		}
 	}
 
+	
+	private void handleSubmenuOfAllVenues() {
+		boolean venuemenurunning = true;
+		while(venuemenurunning) {
+		menu.menuOfAllVenues();
+		
+		String userInputListChoice = menu.menuOfAllVenues(); //venuelistchoice is our row_id we're searching for
+		int intVenueChoiceForSearch = Integer.parseInt(userInputListChoice);
+		Venue venue = venueDAO.getVenueById(intVenueChoiceForSearch);
+		
+		menu.printVenueDetails(venue);
+		handleSubMenu();
+
+	}
+
+
+	}
 	private void handleSubMenu() {
 
 		boolean isLooping = true;
@@ -79,6 +96,9 @@ public class ExcelsiorCLI {
 			
 			else if(submenuChoice.equalsIgnoreCase("2")) {
 				List<Space> availableSpaces = venueDAO.getAvailability();
+				
+				menu.printAvailableSpaces(availableSpaces);
+				
 				//get user input for date, days, and venue, and occupants
 				// Availability check
 //				 if userinput start date > reservation startdate && userinput start date <reservation end date
@@ -102,28 +122,5 @@ public class ExcelsiorCLI {
 		}
 		
 	}
-	private void handleSubmenuOfAllVenues() {
-		boolean venuemenurunning = true;
-		while(venuemenurunning) {
-		menu.menuOfAllVenues();
-		
-		String userInputListChoice = menu.menuOfAllVenues(); //venuelistchoice is our row_id we're searching for
-		int intVenueChoiceForSearch = Integer.parseInt(userInputListChoice);
-		Venue venue = venueDAO.getVenueById(intVenueChoiceForSearch);
-		
-		menu.printVenueDetails(venue);
-		
-		//while(venueListChoice.)
-		//user picks number
-//	while() {
-//			if (venueListChoice= row_id) {
-//				//print venue details
-//			}
-//				
-//		}
-		//loop through list of venues to match row_id with choice
-	}
 
-
-	}
 }

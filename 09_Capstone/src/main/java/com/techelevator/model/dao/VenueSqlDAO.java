@@ -69,10 +69,10 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getListOfSpacesInVenue() {
 		List<Space> allSpacesFromVenue = new ArrayList<Space>();
-		String sql = "venue.name AS venue_name, space.name AS space_name, space.is_accessible, space.daily_rate AS daily_rate " +
+		String sql ="SELECT CAST(space.daily_rate AS decimal),space.*, space.name AS space_name, space.open_from AS open_from, space.open_to AS open_to, space.daily_rate AS daily_rate, space.max_occupancy AS max_occupancy " +
 					"FROM space " + 
-					"JOIN venue ON space.venue_id = venue_id "+
-					"WHERE venue.id = ? ";
+					"JOIN venue ON space.venue_id = venue.id ";
+					//"WHERE venue.id = ? ";
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -114,10 +114,11 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getAvailability() {
 		List<Space> reservedDatesInSpaces = new ArrayList<Space>();
-		String sql = "select venue.id, venue.name, space.id, space.name, space.max_occupancy, reservation.start_date, reservation.end_date, space.open_from, space.open_to"
-				+ "FROM space" + "Left Outer Join reservation ON space.id = reservation.space_id"
-				+ "Join venue ON venue.id = space.venue_id"
-				+ "where venue.id = ?";  //MAY WANT TO UPDATE WHERE STATEMENT to target specific space/venue as opposed to just venue not null.
+		String sql = "select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, reservation.start_date AS start_date, reservation.end_date AS end_date, space.open_from AS open_from, space.open_to AS open_to "
+				+ "FROM space " +
+				"Left outer Join reservation ON space.id = reservation.space_id "
+				+ "Join venue ON venue.id = space.venue_id " + "order by space_id ";
+				//+ "where venue.id = ?";  //MAY WANT TO UPDATE WHERE STATEMENT to target specific space/venue as opposed to just venue not null.
 
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
@@ -242,13 +243,14 @@ public class VenueSqlDAO implements VenueDAO {
 	private Space mapRowToSpace(SqlRowSet results) {
 		Space space = new Space();
 
-		//space.setSpaceId(results.getInt("spaceId"));
+		space.setSpaceId(results.getInt("id"));
 		space.setSpaceName(results.getString("space_name"));
-		//space.setOpenFrom(results.getInt("openFrom"));
-		//space.setOpenTo(results.getInt("openTo"));
+		space.setOpenFrom(results.getInt("open_from"));
+		space.setOpenTo(results.getInt("open_to"));
 		//space.setAccessible(results.getBoolean("isAccessible"));
-		//space.setMaxOccupancy(results.getString("maxOccupancy"));
-		space.setDailyRate(results.getDouble("daily_rate"));
+		//space.setDailyRate(results.getDouble("daily_rate"));
+		space.setMaxOccupancy(results.getString("max_occupancy"));
+		
 
 		return space;
 	}

@@ -143,8 +143,9 @@ public class Menu {
 	}
 	public void printSpace(Space space) {
 		
-		System.out.println(space.getSpaceId()+" "+space.getSpaceName()+" "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+" "+space.getDailyRate()+space.getMaxOccupancy());
-		
+		//System.out.println(space.getSpaceId()+" "+space.getSpaceName()+" "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+" "+space.getDailyRate()+space.getMaxOccupancy());
+		System.out.println(String.format("%-5s %-35s %-10s %-10s %s", space.getSpaceId(), space.getSpaceName(), space.getOpenFrom(), space.getOpenTo(), space.getDailyRate(), space.getMaxOccupancy())); //venue.getRowId() + " " +
+
 		
 		
 	}
@@ -157,6 +158,27 @@ public class Menu {
 	public void invalidChoice() {
 
 		System.out.println("invalid choice, Try Again.");
+	}
+
+	
+	
+	public void printAvailableSpaces(List<Space> availableSpaces) {
+		
+		System.out.println("\n********* Available Spaces  **********\n");
+		System.out.println(String.format("%-5s %-35s %-10s %-10s %s", "Id", "Name", "Open", "Close", "Daily Rate", "Max. Occupancy\n")); //venue.getRowId() + " " +
+		System.out.println(" \n                                                       \n ");
+
+		if (availableSpaces.isEmpty()) {
+			System.out.println("No Results Found!");
+			return;
+		}
+
+		for (Space space : availableSpaces) {
+
+			printSpace(space);
+		}
+		System.out.println("\n************************************\n");
+		
 	}
 
 }

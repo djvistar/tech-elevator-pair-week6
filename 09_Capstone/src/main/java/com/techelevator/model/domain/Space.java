@@ -1,5 +1,7 @@
 package com.techelevator.model.domain;
 
+import java.math.BigDecimal;
+
 public class Space {
 
 	
