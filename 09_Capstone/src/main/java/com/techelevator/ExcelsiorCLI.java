@@ -107,6 +107,10 @@ public class ExcelsiorCLI {
 		menu.menuOfAllVenues();
 		
 		String venueListChoice = menu.menuOfAllVenues();
+		if (venueListChoice.equalsIgnoreCase("1")) {
+			System.out.println("value carries");
+		}
+		//while(venueListChoice.)
 		//user picks number
 //	while() {
 //			if (venueListChoice= row_id) {
