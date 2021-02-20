@@ -11,6 +11,10 @@ import com.techelevator.model.domain.Space;
 import com.techelevator.model.domain.Venue;
 import com.techelevator.view.Menu;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class ExcelsiorCLI {
@@ -98,6 +102,104 @@ public class ExcelsiorCLI {
 				List<Space> availableSpaces = venueDAO.getAvailability();
 				
 				menu.printAvailableSpaces(availableSpaces);
+				//handleReservationSubMenu();
+				//create submenumethod for here
+				//menu.makeReservationMenu();
+				
+			}
+			else if (submenuChoice.equalsIgnoreCase("r")) {
+				isLooping= false;
+			
+			}
+		}
+		}
+//		public void handleReservationSubMenu() {
+//			boolean reservationRunning = true;
+//			while(reservationRunning) {
+//				Date startDate = null;
+//				SimpleDateFormat dateFormat;
+//				String userReservationInput = menu.makeReservationMenu();
+//				
+//				String startDateinput = userReservationInput;
+////				Prompted			System.out.println("When do you need the space?");	
+//				
+//				try {
+//					startDate = new SimpleDateFormat("MM-dd-yyyy").parse(startDateinput);
+//					
+//				
+//				} catch (ParseException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} 
+//				Calendar cal =Calendar.getInstance();
+//				cal.setTime(startDate);
+//				
+//				String userNumberOfDays = menu.makeReservationMenu(); 
+//				int daysForReservation = Integer.parseInt(userNumberOfDays);
+//				
+//				cal.add(Calendar.DAY_OF_MONTH, daysForReservation);
+				//SimpleDateFormat endDate = startDate(cal.getTime());
+						//
+				//c.add(Calendar.DAY_OF_MONTH, 7); 
+				
+				
+//				Date arrivalDate = null;
+//				System.out.println("What is the arrival date? yyyy-mm-dd");
+//				String arrivalDateS = input.nextLine();
+//				int arrivalMonth = Integer.parseInt(arrivalDateS.substring(5, 7));
+//				try {
+//					arrivalDate = new SimpleDateFormat("yyyy-MM-dd").parse(arrivalDateS);
+//				} catch (ParseException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				LocalDate localArrivalDate = LocalDate.parse(arrivalDateS);
+//				System.out.println("What is the departure date? yyyy-mm-dd");
+//				String departureDateS = input.nextLine();
+
+			
+			
+			
+			
+//			} 
+				
+				
+//				Prompted			System.out.println("How many days will you need the space?");
+			
+			
+				
+			
+				
+			
+			
+				
+				
+// days = int
+				
+				
+//	Prompted			System.out.println("How many people will be in attendance?");
+// attendees = int
+			}
+			
+		
+				
+//				scanner.nextLine();
+
+//				scanner.nextLine();
+
+//				scanner.nextLine();
+				// checks input against our list
+				// prints screen of spaces available based on needs
+	
+//				}
+			
+			
+		
+	//}
+
+
+				
+				
 				
 				//get user input for date, days, and venue, and occupants
 				// Availability check
@@ -113,14 +215,4 @@ public class ExcelsiorCLI {
 //				else 
 //				input into list as Available
 				
-			}
-			else if (submenuChoice.equalsIgnoreCase("r")) {
-				isLooping= false;
 			
-			}
-
-		}
-		
-	}
-
-}

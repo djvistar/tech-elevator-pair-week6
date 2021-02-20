@@ -115,7 +115,7 @@ public class VenueSqlDAO implements VenueDAO {
 	@Override
 	public List<Space> getAvailability() {
 		List<Space> reservedDatesInSpaces = new ArrayList<Space>();
-		String sql = "select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, reservation.start_date AS start_date, reservation.end_date AS end_date, space.open_from AS open_from, space.open_to AS open_to "
+		String sql = "select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, space.daily_rate::money::numeric::float8 AS daily_rate, reservation.start_date AS start_date, reservation.end_date AS end_date, space.open_from AS open_from, space.open_to AS open_to "
 				+ "FROM space " +
 				"Left outer Join reservation ON space.id = reservation.space_id "
 				+ "Join venue ON venue.id = space.venue_id " + "order by space_id ";
