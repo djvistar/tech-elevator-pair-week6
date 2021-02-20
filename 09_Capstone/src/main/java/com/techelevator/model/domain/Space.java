@@ -10,7 +10,7 @@ public class Space {
 	private boolean isAccessible;
 	private int openFrom;
 	private int openTo;
-	private double dailyRate;
+	private BigDecimal dailyRate;
 	private String maxOccupancy;
 	
 	
@@ -48,10 +48,10 @@ public class Space {
 	public void setOpenTo(int openTo) {
 		this.openTo = openTo;
 	}
-	public double getDailyRate() {
+	public BigDecimal getDailyRate() {
 		return dailyRate;
 	}
-	public void setDailyRate(double dailyRate) {
+	public void setDailyRate(BigDecimal dailyRate) {
 		this.dailyRate = dailyRate;
 	}
 	public String getMaxOccupancy() {
