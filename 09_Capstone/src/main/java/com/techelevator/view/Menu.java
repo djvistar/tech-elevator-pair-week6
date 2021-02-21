@@ -64,24 +64,30 @@ public class Menu {
 		return scanner.nextLine();
 	}
 
-	public Reservation startReservationProcess() { // ask for start date
+	public String getStartDateInput() { // ask for start date
 
-		Reservation newReservation = new Reservation();
+		//Reservation newReservation = new Reservation();
 
 		System.out.println("When do you need the space?");
-		String startDateinput = scanner.nextLine(); // parse in cli for date
-		newReservation.setStartDate(startDateinput);
-
-		System.out.println("How many days will you need the space?");
-		String userNumberOfDays = scanner.nextLine();
-		newReservation.setEndDate(userNumberOfDays);//// need to do math to get the right value
-
-		System.out.println("How many people will be in attendance?");
-		String userNumberOfAttendees = scanner.nextLine();
-		newReservation.setNumberOfAttendees(Integer.parseInt(userNumberOfAttendees));
-
-		return newReservation;
+		return scanner.nextLine(); // parse in cli for date
+	//	String startDateinput =
 	}
+		//newReservation.setStartDate(startDateinput);
+	public String getNumberOfDays() {
+		System.out.println("How many days will you need the space?");
+		return scanner.nextLine();
+	}
+		//String userNumberOfDays = scanner.nextLine();
+		//newReservation.setEndDate(userNumberOfDays);//// need to do math to get the right value
+	public String getAttendance() {
+		System.out.println("How many people will be in attendance?");
+		return scanner.nextLine();
+	}
+		//String userNumberOfAttendees = scanner.nextLine();
+		//newReservation.setNumberOfAttendees(Integer.parseInt(userNumberOfAttendees));
+
+		//return newReservation;
+	
 	// checks input against our list
 	// prints screen of spaces available based on needs
 ///////////////////////////////////////////////////////////////////////////

@@ -12,6 +12,7 @@ import com.techelevator.model.domain.Category;
 import com.techelevator.model.domain.Reservation;
 import com.techelevator.model.domain.Space;
 import com.techelevator.model.domain.Venue;
+import com.techelevator.view.Menu;
 
 public class VenueSqlDAO implements VenueDAO {
 
@@ -145,7 +146,8 @@ public class VenueSqlDAO implements VenueDAO {
 				+ "OR (? <= start_date AND ? >= end_date) "// first place holder is requested start
 																				// date, second ph is requested end date
 				+ ")";
-		jdbcTemplate.queryForRowSet(sql );
+		jdbcTemplate.queryForRowSet(sql);
+	
 		//ORDER FOR QUERY PlaceHolder VALUES: attendees, month of startdate, month of end date, inputstartdate, input startdate, input end date, input enddate, input startdate, input start date
 
 		
