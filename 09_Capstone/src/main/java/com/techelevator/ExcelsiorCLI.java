@@ -11,6 +11,7 @@ import com.techelevator.model.domain.Space;
 import com.techelevator.model.domain.Venue;
 import com.techelevator.view.Menu;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -21,7 +22,7 @@ public class ExcelsiorCLI {
 
 	private Menu menu;
 	private VenueDAO venueDAO;
-
+    private BigDecimal days;
 	public ExcelsiorCLI(DataSource datasource) {
 		this.menu = new Menu();
 		venueDAO = new VenueSqlDAO(datasource);
@@ -140,8 +141,12 @@ public class ExcelsiorCLI {
 				cal.add(Calendar.DAY_OF_MONTH, daysForReservation);
 				Date endDate = cal.getTime();		
 				
-				
-				
+				List<Space> spacesToReserve = venueDAO.getAvailability();
+//				if (startDate < getOpenFrom() && openFrom && openTo = null) {
+//					
+//					
+				//}
+				menu.printSpacesAvailabeleForReservation(spacesToReserve);
 				//variables to be used
 				//start date
 				//endDate

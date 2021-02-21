@@ -70,11 +70,11 @@ public class VenueSqlDAO implements VenueDAO {
 	public List<Space> getListOfSpacesInVenue() {
 		List<Space> allSpacesFromVenue = new ArrayList<Space>();
 		String sql ="SELECT space.daily_rate::money::numeric::float8 AS daily_rate, space.id AS id, space.name AS space_name, space.open_from AS open_from, space.open_to AS open_to, space.max_occupancy AS max_occupancy " +
-					"FROM space " + 
-					"JOIN venue ON space.venue_id = venue.id " ;
-		//			"WHERE venue_id = ? ";
+				"FROM space " + 
+				"JOIN venue ON space.venue_id = venue.id " ;
+					//"WHERE venue.id = ? ";
 		//String sql = "SELECT * " + "FROM space ";
-//                                                               space.daily_rate::money::numeric::float8
+
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
 		while (results.next()) {
@@ -124,7 +124,7 @@ public class VenueSqlDAO implements VenueDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
 		while (results.next()) {
-
+     
 			Space space = mapRowToSpace(results);
 			reservedDatesInSpaces.add(space);
 
@@ -132,14 +132,6 @@ public class VenueSqlDAO implements VenueDAO {
 		return reservedDatesInSpaces;
 
 		}
-	
-//   FOR RESERVATION CHECK	
-//	"select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, space.daily_rate::money::numeric::float8 AS daily_rate, reservation.start_date AS start_date, reservation.end_date AS end_date, space.open_from AS open_from, space.open_to AS open_to "
-//	+ "FROM space " +
-//	"Left outer Join reservation ON space.id = reservation.space_id "
-//	+ "Join venue ON venue.id = space.venue_id " + "order by space_id ";
-	
-	
 		/// if userinput start date > reservation startdate && userinput start date
 		/// <reservation end date
 		// then not available
@@ -258,8 +250,6 @@ public class VenueSqlDAO implements VenueDAO {
 		space.setOpenTo(results.getInt("open_to"));
 		//space.setAccessible(results.getBoolean("isAccessible"));
 		space.setDailyRate(results.getBigDecimal("daily_rate"));
-		space.setMaxOccupancy(results.getString("max_occupancy"));
-		
 
 		return space;
 	}

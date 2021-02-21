@@ -183,5 +183,33 @@ public class Menu {
 	}
 
 	
+	public void printSpacesAvailable(Space space) {
+		
+		//System.out.println(space.getSpaceId()+" "+space.getSpaceName()+" "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+" "+space.getDailyRate()+space.getMaxOccupancy());
+		System.out.println(String.format("%-5s %-35s %-10s %-25s %-25s %s", space.getSpaceId(), space.getSpaceName(), space.getDailyRate(), space.getMaxOccupancy())); //venue.getRowId() + " " +
+
+		
+		
+	}
+	
+	public void printSpacesAvailabeleForReservation(List<Space> spacesToReserve) {
+		System.out.println("\n********* Available Spaces  **********\n");
+		System.out.println(String.format("%-5s %-35s %-10s %-25s %s", "Id", "Name", "Daily Rate", "Max. Occupancy", "Total Cost\n")); //venue.getRowId() + " " +
+		System.out.println(" \n                                                       \n ");
+
+		if (spacesToReserve.isEmpty()) {
+			System.out.println("No Results Found!");
+			return;
+		}
+
+		for (Space space : spacesToReserve) {
+
+			printSpace(space);
+		}
+		System.out.println("\n************************************\n");
+		
+	}
+
+	
 	
 }
