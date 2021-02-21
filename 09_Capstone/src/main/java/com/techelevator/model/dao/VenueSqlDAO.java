@@ -132,6 +132,26 @@ public class VenueSqlDAO implements VenueDAO {
 		return reservedDatesInSpaces;
 
 		}
+	
+	@Override
+	public List<Space> getAvailableSpaces() {
+		List<Space> availableSpaces = new ArrayList<Space>();
+		String sql = "select space.id AS id, space.name AS space_name, space.max_occupancy AS max_occupancy, space.daily_rate::money::numeric::float8 AS daily_rate, space.open_from AS open_from, space.open_to AS open_to "
+				+ "FROM space " +
+				"Left outer Join reservation ON space.id = reservation.space_id "
+				+ "Join venue ON venue.id = space.venue_id " + "order by space_id ";
+				//+ "where venue.id = ?";  //MAY WANT TO UPDATE WHERE STATEMENT to target specific space/venue as opposed to just venue not null.
+
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+
+		while (results.next()) {
+     //Crazy ass if statement HERE
+			Space space = mapRowToSpace(results);
+			availableSpaces .add(space);
+
+		}
+		return availableSpaces ;
+	}
 		/// if userinput start date > reservation startdate && userinput start date
 		/// <reservation end date
 		// then not available
@@ -278,6 +298,8 @@ public class VenueSqlDAO implements VenueDAO {
 			throw new RuntimeException("Something went wrong while getting an id for the new reservation");
 		}
 	}
+
+
 
 
 
