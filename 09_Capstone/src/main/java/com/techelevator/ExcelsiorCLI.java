@@ -116,37 +116,40 @@ public class ExcelsiorCLI {
 		}
 		public void handleReservationSubMenu() {
 			boolean reservationRunning = true;
-			while(reservationRunning) {
+			
 				Date startDate = null;
 				SimpleDateFormat dateFormat;
-				String userReservationInput = menu.makeReservationMenu();
-				
-				String startDateinput = userReservationInput;
-//				Prompted			System.out.println("When do you need the space?");	
-				
-				try {
-					startDate = new SimpleDateFormat("MM-dd-yyyy").parse(startDateinput);
-					
-				
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
-				Calendar cal =Calendar.getInstance();
-				cal.setTime(startDate);
-				
-				String userNumberOfDays = menu.makeReservationMenu(); 
-				int daysForReservation = Integer.parseInt(userNumberOfDays);
-				
-				cal.add(Calendar.DAY_OF_MONTH, daysForReservation);
-				Date endDate = cal.getTime();		
-				
-				List<Space> spacesToReserve = venueDAO.getAvailability();
+				menu.startReservationProcess();
+			while(reservationRunning) {
+//	newReservation.getstartdate();
+//	newReservation.getEndDate();
+//	newReservation.getNumberOfAttendees();
+	
+	
+			///******Keep for calendar stuff	
+//				try {
+//					startDate = new SimpleDateFormat("MM-dd-yyyy").parse(startDateinput);
+//					
+//				
+//				} catch (ParseException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} 
+//				Calendar cal =Calendar.getInstance();
+//				cal.setTime(startDate);
+//				
+//				
+//				cal.add(Calendar.DAY_OF_MONTH, daysForReservation);
+//				Date endDate = cal.getTime();
+//				
+//			
+//				
+//				List<Space> spacesToReserve = venueDAO.getAvailability();
 //				if (startDate < getOpenFrom() && openFrom && openTo = null) {
 //					
 //					
 				//}
-				menu.printSpacesAvailabeleForReservation(spacesToReserve);
+				//menu.printSpacesAvailabeleForReservation(spacesToReserve);
 				//variables to be used
 				//start date
 				//endDate
@@ -175,7 +178,7 @@ public class ExcelsiorCLI {
 				
 //				Prompted			System.out.println("How many days will you need the space?");
 			
-			
+				}
 				
 			
 				
@@ -204,7 +207,7 @@ public class ExcelsiorCLI {
 			
 			
 		
-	}
+	
 
 
 				

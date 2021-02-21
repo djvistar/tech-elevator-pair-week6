@@ -3,6 +3,7 @@ package com.techelevator.view;
 import java.util.List;
 import java.util.Scanner;
 
+import com.techelevator.model.domain.Reservation;
 import com.techelevator.model.domain.Space;
 import com.techelevator.model.domain.Venue;
 
@@ -32,7 +33,7 @@ public class Menu {
 //		System.out.println();
 //		System.out.println();
 //		System.out.println();
-		
+
 		return scanner.nextLine();
 	}
 
@@ -63,20 +64,28 @@ public class Menu {
 		return scanner.nextLine();
 	}
 
-	public String makeReservationMenu() {
+	public Reservation startReservationProcess() { // ask for start date
+
+		Reservation newReservation = new Reservation();
 
 		System.out.println("When do you need the space?");
-		scanner.nextLine();
-		System.out.println("How many days will you need the space?");
-		scanner.nextLine();
-		System.out.println("How many people will be in attendance?");
-		scanner.nextLine();
-		
-		// checks input against our list
-		// prints screen of spaces available based on needs
+		String startDateinput = scanner.nextLine(); // parse in cli for date
+		newReservation.setStartDate(startDateinput);
 
-		return scanner.nextLine();
+		System.out.println("How many days will you need the space?");
+		String userNumberOfDays = scanner.nextLine();
+		newReservation.setEndDate(userNumberOfDays);//// need to do math to get the right value
+
+		System.out.println("How many people will be in attendance?");
+		String userNumberOfAttendees = scanner.nextLine();
+		newReservation.setNumberOfAttendees(Integer.parseInt(userNumberOfAttendees));
+
+		return newReservation;
 	}
+	// checks input against our list
+	// prints screen of spaces available based on needs
+///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 	public void printListOfVenues(List<Venue> venuesToPrint) {
 
@@ -102,10 +111,11 @@ public class Menu {
 			return;
 		} else {
 
-			System.out.println(String.format("%-5s %-35s %-5s %s", "Venue Name: ", venue.getVenueName() ," Venue Number: ", venue.getVenueId())); //venue.getRowId() + " " +
+			System.out.println(String.format("%-5s %-35s %-5s %s", "Venue Name: ", venue.getVenueName(),
+					" Venue Number: ", venue.getVenueId())); // venue.getRowId() + " " +
 
 		}
-		//"-25s, %s"
+		// "-25s, %s"
 	}
 
 	public void printVenueDetails(Venue venue) {
@@ -126,6 +136,7 @@ public class Menu {
 
 		}
 	}
+
 	public void printListOfSpace(List<Space> SpacesToPrint) {
 
 		System.out.println("\n********* Venue Results **********\n");
@@ -142,13 +153,16 @@ public class Menu {
 		System.out.println("\n************************************\n");
 		// functionality, print the pick a venue menu here;
 	}
-	public void printSpace(Space space) {
-		
-		//System.out.println(space.getSpaceId()+" "+space.getSpaceName()+" "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+" "+space.getDailyRate()+space.getMaxOccupancy());
-		System.out.println(String.format("%-5s %-35s %-10s %-25s %-25s %s", space.getSpaceId(), space.getSpaceName(), space.getOpenFrom(), space.getOpenTo(), space.getDailyRate(), space.getMaxOccupancy())); //venue.getRowId() + " " +
 
-		
-		
+	public void printSpace(Space space) {
+
+		// System.out.println(space.getSpaceId()+" "+space.getSpaceName()+"
+		// "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+"
+		// "+space.getDailyRate()+space.getMaxOccupancy());
+		System.out.println(String.format("%-5s %-35s %-10s %-25s %-25s %s", space.getSpaceId(), space.getSpaceName(),
+				space.getOpenFrom(), space.getOpenTo(), space.getDailyRate(), space.getMaxOccupancy())); // venue.getRowId()
+																											// + " " +
+
 	}
 
 	public void closeProgram() {
@@ -161,12 +175,11 @@ public class Menu {
 		System.out.println("invalid choice, Try Again.");
 	}
 
-	
-	
 	public void printAvailableSpaces(List<Space> availableSpaces) {
-		
+
 		System.out.println("\n********* Available Spaces  **********\n");
-		System.out.println(String.format("%-5s %-35s %-10s %-25s %-25s %s", "Id", "Name", "Open", "Close", "Daily Rate", "Max. Occupancy\n")); //venue.getRowId() + " " +
+		System.out.println(String.format("%-5s %-35s %-10s %-25s %-25s %s", "Id", "Name", "Open", "Close", "Daily Rate",
+				"Max. Occupancy\n")); // venue.getRowId() + " " +
 		System.out.println(" \n                                                       \n ");
 
 		if (availableSpaces.isEmpty()) {
@@ -179,22 +192,23 @@ public class Menu {
 			printSpace(space);
 		}
 		System.out.println("\n************************************\n");
-		
+
 	}
 
-	
 	public void printSpacesAvailable(Space space) {
-		
-		//System.out.println(space.getSpaceId()+" "+space.getSpaceName()+" "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+" "+space.getDailyRate()+space.getMaxOccupancy());
-		System.out.println(String.format("%-5s %-35s %-10s %-25s %-25s %s", space.getSpaceId(), space.getSpaceName(), space.getDailyRate(), space.getMaxOccupancy())); //venue.getRowId() + " " +
 
-		
-		
+		// System.out.println(space.getSpaceId()+" "+space.getSpaceName()+"
+		// "+space.isAccessible()+" " + space.getOpenFrom()+ " "+ space.getOpenTo()+"
+		// "+space.getDailyRate()+space.getMaxOccupancy());
+		System.out.println(String.format("%-5s %-35s %-10s %-25s %-25s %s", space.getSpaceId(), space.getSpaceName(),
+				space.getDailyRate(), space.getMaxOccupancy())); // venue.getRowId() + " " +
+
 	}
-	
+
 	public void printSpacesAvailabeleForReservation(List<Space> spacesToReserve) {
 		System.out.println("\n********* Available Spaces  **********\n");
-		System.out.println(String.format("%-5s %-35s %-10s %-25s %s", "Id", "Name", "Daily Rate", "Max. Occupancy", "Total Cost\n")); //venue.getRowId() + " " +
+		System.out.println(String.format("%-5s %-35s %-10s %-25s %s", "Id", "Name", "Daily Rate", "Max. Occupancy",
+				"Total Cost\n")); // venue.getRowId() + " " +
 		System.out.println(" \n                                                       \n ");
 
 		if (spacesToReserve.isEmpty()) {
@@ -207,9 +221,7 @@ public class Menu {
 			printSpace(space);
 		}
 		System.out.println("\n************************************\n");
-		
+
 	}
 
-	
-	
 }

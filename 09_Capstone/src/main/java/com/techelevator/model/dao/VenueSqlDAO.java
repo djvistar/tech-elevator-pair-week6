@@ -124,7 +124,7 @@ public class VenueSqlDAO implements VenueDAO {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 
 		while (results.next()) {
-     
+     //Crazy ass if statement HERE
 			Space space = mapRowToSpace(results);
 			reservedDatesInSpaces.add(space);
 
