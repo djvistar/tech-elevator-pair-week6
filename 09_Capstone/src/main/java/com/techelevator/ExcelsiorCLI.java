@@ -125,10 +125,9 @@ public class ExcelsiorCLI {
 				
 				
 			//while(reservationRunning) {
-				
-			Space space = venueDAO.getAvailableSpaces(inputStartDate, numberOfAttendees, daysNeeded);
+			List <Space> listOfSpaces = venueDAO.getAvailableSpaces();
 			
-			menu.printSpacesAvailable(space);
+			menu.printAvailableSpaces(listOfSpaces);
 //	newReservation.getstartdate();
 //	newReservation.getEndDate();
 //	newReservation.getNumberOfAttendees();
