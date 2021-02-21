@@ -121,6 +121,7 @@ public class ExcelsiorCLI {
 				SimpleDateFormat dateFormat;
 				menu.startReservationProcess();
 			while(reservationRunning) {
+				venueDAO.getAvailableSpaces();
 //	newReservation.getstartdate();
 //	newReservation.getEndDate();
 //	newReservation.getNumberOfAttendees();
